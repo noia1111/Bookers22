@@ -1,2 +1,62 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+            <div>
+        <h2>User info</h2>
+        <%= image_tag @user.get_profile_image(100,100) %>
+        <table>
+          <tbody>
+            <tr>
+              <th>name</th>
+              <td><%= @user.name %></td>
+            </tr>
+            <tr>
+              <th>introduction</th>
+              <td><%= @user.introduction %></td>
+            </tr>
+          </tbody>
+        </table>
+          <% if current_user == @user %>
+            <%= link_to edit_user_path(@user.id), class: "btn btn-outline-secondary" do %>
+              <i class="fas fa-user-cog"></i>
+            <% end %>
+          <% else %>
+            <%= link_to user_path(current_user), class: "btn btn-outline-secondary" do %>
+              <i class="fas fa-user-cog"></i>
+            <% end %>
+          <% end %>
+      </div>
+      
+      <%= render 'books/list' %>
+
+    </div>
+    
+    
+    
+    
+    
+    
+
+    <div class="col-md-8 offset-md-1">
+      <h2>Books</h2>
+      <table>
+        <thead>
+          <tr>
+            <th></th>
+            <th>Title</th>
+            <th>Opinion</th>
+          </tr>
+        </thead>
+        <tbody>
+        <% @books.each do |book1| %>
+          <tr>
+            <td><%= image_tag book1.user.get_profile_image(100,100) %></td>
+            <td><%= link_to book1.title, book_path(book1.id) %></td>
+            <td><%= book1.body %></td>
+        <% end %>
+          </tr>
+        </tbody>
+      
+      </table>
+    </div>
+  </div>

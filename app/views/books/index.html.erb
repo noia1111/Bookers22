@@ -1,54 +1,59 @@
-  <div>
-    <div>
-      <h2>User info</h2>
-      <%= image_tag current_user.get_profile_image(100,100) %>
-      <h3>name<%= current_user.name %></h3>
-      <h3>introduction<%= current_user.introduction %></h3>
-      <p><%= link_to "プロフィール編集", edit_user_path(current_user.id) %></p>
-    </div>
-    
-    <div>
-      <h1>New Book</h1>
-      <%= form_with model: @book do |f| %>
-        <h4>Title</h4>
-        <%= f.text_field :title %>
-        <h4>Opinion</h4>
-        <%= f.text_area :body %>
-        <%= f.submit 'Create Book' %>
-      <% end %>
-    </div>
-    
-    
-    
-    
-    
-    
-    
-  </div>
-
-  <div>
-    <h2>Books</h2>
-    <table>
-      <thead>
-        <tr>
-          <th></th>
-          <th>Title</th>
-          <th>Opinion</th>
-        </tr>
-      </thead>
-      <tbody>
-      <% @books.each do |book1| %>
-        <tr>
-          
-          <%= link_to user_path(book1.user_id) do %>
-          <td><%= image_tag book1.user.get_profile_image(100,100) %></td>
-          <% end %>
-    
-      <td><%= book1.title %></td>
-      <td><%= book1.body %></td>
-      <% end %>
-        </tr>
-      </tbody>
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+            <div>
+        <h2>User info</h2>
+        <%= image_tag current_user.get_profile_image(100,100) %>
+        <table>
+          <tbody>
+            <tr>
+              <th>name</th>
+              <td><%= current_user.name %></td>
+            </tr>
+            <tr>
+              <th>introduction</th>
+              <td><%= current_user.introduction %></td>
+            </tr>
+          </tbody>
+        </table>
+        <%= link_to edit_user_path(current_user.id), class: "btn btn-outline-secondary" do %>
+          　　　　　　<i class="fas fa-user-cog"></i>　　　　　　
+        <% end %>  
+      </div>
       
-    </table>
-  </div>
+      <%= render 'list' %>
+
+    </div>
+    
+    
+    
+    
+    
+    
+
+    <div class="col-md-8 offset-md-1">
+      <h2>Books</h2>
+      <table>
+        <thead>
+          <tr>
+            <th></th>
+            <th>Title</th>
+            <th>Opinion</th>
+          </tr>
+        </thead>
+        <tbody>
+        <% @books.each do |book1| %>
+          <tr>
+            <%= link_to user_path(book1.user_id) do %>
+            <td><%= image_tag book1.user.get_profile_image(100,100) %></td>
+            <% end %>
+        <td><%= link_to book1.title, book_path(book1.id) %></td>
+        <td><%= book1.body %></td>
+        <% end %>
+          </tr>
+        </tbody>
+      
+      </table>
+    </div>
+  </div>  <!-- この行を追加 -->
+</div> 
