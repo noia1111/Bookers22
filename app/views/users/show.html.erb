@@ -1,3 +1,6 @@
+    <%= flash[:notice] %>
+
+
 <div class="container">
   <div class="row">
     <div class="col-md-3">
@@ -16,15 +19,10 @@
             </tr>
           </tbody>
         </table>
-          <% if current_user == @user %>
             <%= link_to edit_user_path(@user.id), class: "btn btn-outline-secondary" do %>
-              <i class="fas fa-user-cog"></i>
-            <% end %>
-          <% else %>
-            <%= link_to user_path(current_user), class: "btn btn-outline-secondary" do %>
-              <i class="fas fa-user-cog"></i>
-            <% end %>
-          <% end %>
+          　　　　　　<i class="fas fa-user-cog"></i>　　　　　　
+          　　　　　　<% end %>
+
       </div>
       
       <%= render 'books/list' %>
@@ -50,7 +48,12 @@
         <tbody>
         <% @books.each do |book1| %>
           <tr>
-            <td><%= image_tag book1.user.get_profile_image(100,100) %></td>
+            <td><%= link_to user_path(book1.user_id), class: "text-decoration-none" do %>
+            <%= image_tag book1.user.get_profile_image(100,100) %>
+            <% end %>
+            </td>
+            
+            
             <td><%= link_to book1.title, book_path(book1.id) %></td>
             <td><%= book1.body %></td>
         <% end %>

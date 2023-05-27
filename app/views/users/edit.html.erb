@@ -1,3 +1,18 @@
+<div class="container px-5 px-sm-0">
+  <div class="row">
+    <%= flash[:notice] %>
+
+  <% if @user.errors.any? %>
+    <%= @user.errors.count %>error prohibited this obj from being saved:<br>
+    <ul>
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  <% end %>
+  </div>
+</div>
+
       <div class="d-flex flex-column align-items-center justify-content-center ">
         <div>
         <h1>User info</h1>

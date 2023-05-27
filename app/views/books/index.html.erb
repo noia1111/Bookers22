@@ -1,3 +1,18 @@
+<div class="container px-5 px-sm-0">
+    <%= flash[:notice] %>
+
+  <% if @book.errors.any? %>
+    <%= @book.errors.count %>error prohibited this obj from being saved:
+    <ul>
+      <% @book.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
+
+</div>
+
 <div class="container">
   <div class="row">
     <div class="col-md-3">
@@ -17,43 +32,42 @@
           </tbody>
         </table>
         <%= link_to edit_user_path(current_user.id), class: "btn btn-outline-secondary" do %>
-          　　　　　　<i class="fas fa-user-cog"></i>　　　　　　
-        <% end %>  
+          　　　　　　<i class="fas fa-user-cog"></i>　
+          　　　　　　<% end %>
       </div>
-      
+
       <%= render 'list' %>
 
     </div>
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
 
     <div class="col-md-8 offset-md-1">
       <h2>Books</h2>
       <table>
         <thead>
-          <tr>
             <th></th>
             <th>Title</th>
             <th>Opinion</th>
-          </tr>
         </thead>
         <tbody>
         <% @books.each do |book1| %>
           <tr>
-            <%= link_to user_path(book1.user_id) do %>
-            <td><%= image_tag book1.user.get_profile_image(100,100) %></td>
+            <td><%= link_to user_path(book1.user_id), class: "text-decoration-none" do %>
+            <%= image_tag book1.user.get_profile_image(100,100) %>
             <% end %>
+            </td>
         <td><%= link_to book1.title, book_path(book1.id) %></td>
         <td><%= book1.body %></td>
-        <% end %>
           </tr>
+        <% end %>
         </tbody>
-      
+
       </table>
     </div>
   </div>  <!-- この行を追加 -->
-</div> 
+</div>
